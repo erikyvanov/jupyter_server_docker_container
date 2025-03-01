@@ -23,7 +23,7 @@ RUN python3.11 -m venv /app/venv
 
 RUN /app/venv/bin/pip install --no-cache-dir --upgrade pip
 
-RUN /app/venv/bin/pip install --no-cache-dir jupyter-server
+RUN /app/venv/bin/pip install --no-cache-dir jupyterlab
 
 RUN /app/venv/bin/pip install --no-cache-dir torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
 
@@ -38,4 +38,4 @@ WORKDIR /app/jupyter_workspace
 
 EXPOSE 8888
 
-CMD ["/bin/bash", "-c", ". /app/venv/bin/activate && jupyter server --notebook-dir=/app/jupyter_workspace --ip=0.0.0.0 --port=8888 --allow-root --config=/etc/jupyter/jupyter_server_config.py"]
+CMD ["/bin/bash", "-c", ". /app/venv/bin/activate && jupyter lab --no-browser --notebook-dir=/app/jupyter_workspace --ip=0.0.0.0 --port=8888 --allow-root --config=/etc/jupyter/jupyter_server_config.py"]
