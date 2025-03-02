@@ -1,4 +1,5 @@
 from jupyter_server.serverapp import ServerApp
+from jupyter_server.auth.security import set_password
 
 
 def add_ignore_patterns(app: ServerApp):
@@ -45,17 +46,12 @@ def set_server_ip(app: ServerApp):
     app.log.info(f"ServerApp.ip configured: {c.ServerApp.ip}")
 
 
-def set_password(app: ServerApp):
+def set_jupyter_password(app: ServerApp):
     c = app.config
 
-    password_hash = ServerApp.generate_password('password')
-    if password_hash:
-        c.ServerApp.password = password_hash
-        app.log.info(
-            "Password for Jupyter Server configured (stored hash).")
-    else:
-        app.log.warning(
-            "Password hash could not be generated. Password authentication may not work.")
+    set_password("password")
+    app.log.info(
+        "Password for Jupyter Server configured (stored hash).")
 
 
 def load_config(app: ServerApp):
@@ -66,7 +62,7 @@ def load_config(app: ServerApp):
     set_trusted_origins(app)
     allow_remote_access(app)
     set_server_ip(app)
-    set_password(app)
+    set_jupyter_password(app)
 
 
 def initialize(app: ServerApp):
