@@ -29,6 +29,7 @@ RUN /app/venv/bin/pip install --no-cache-dir torch torchvision torchaudio --inde
 
 RUN /app/venv/bin/pip install --no-cache-dir opencv-python
 
+ENV JUPYTER_CONFIG_DIR=/etc/jupyter
 COPY jupyter_server_config.py /etc/jupyter/jupyter_server_config.py
 
 VOLUME /app/jupyter_workspace
