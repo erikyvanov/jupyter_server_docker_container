@@ -54,6 +54,15 @@ def set_jupyter_password(app: ServerApp):
         "Password for Jupyter Server configured (stored hash).")
 
 
+def set_restrictions(app: ServerApp):
+    c = app.config
+
+    c.ServerApp.allow_shutdown = False
+
+    app.log.info(
+        f"allow_shutdown: {c.ServerApp.allow_shutdown}")
+
+
 def load_config(app: ServerApp):
     app.log.info(
         "Loading custom configuration for Jupyter Server...")
@@ -63,6 +72,7 @@ def load_config(app: ServerApp):
     allow_remote_access(app)
     set_server_ip(app)
     set_jupyter_password(app)
+    set_restrictions(app)
 
 
 def initialize(app: ServerApp):
