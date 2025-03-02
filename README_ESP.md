@@ -31,15 +31,15 @@ Este repositorio contiene un Dockerfile configurado para ejecutar un servidor de
 Construye la imagen ejecutando el siguiente comando:
 
 ```bash
-sudo docker build -t erikyvanov-jupyter-server .
+docker build -t erikyvanov-jupyter-server .
 ```
 ### 2. Inicialización de la Persistencia del Entorno Virtual (Solo se realiza una vez)
 Copia el entorno virtual original de la imagen para inicializar la persistencia del venv:
 ```bash
 mkdir -p $(pwd)/jupyter_server
-sudo docker create --name erikyvanov-jupyter-server_temp_copy erikyvanov-jupyter-server
-sudo docker cp erikyvanov-jupyter-server_temp_copy:/app/venv $(pwd)/jupyter_server
-sudo docker rm erikyvanov-jupyter-server_temp_copy
+docker create --name erikyvanov-jupyter-server_temp_copy erikyvanov-jupyter-server
+docker cp erikyvanov-jupyter-server_temp_copy:/app/venv $(pwd)/jupyter_server
+docker rm erikyvanov-jupyter-server_temp_copy
 ```
 
 ### 3. Ejecución del Servidor de Jupyter

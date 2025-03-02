@@ -29,7 +29,7 @@ This repository contains a Dockerfile configured to run a Jupyter Server with NV
 Build the image by running the following command:
 
 ```bash
-sudo docker build -t erikyvanov-jupyter-server .
+docker build -t erikyvanov-jupyter-server .
 ```
 
 ### 2. Initialize Virtual Environment Persistence (Run only once)
@@ -37,9 +37,9 @@ Copy the original virtual environment from the image to initialize venv persiste
 
 ```bash
 mkdir -p $(pwd)/jupyter_server
-sudo docker create --name erikyvanov-jupyter-server_temp_copy erikyvanov-jupyter-server
-sudo docker cp erikyvanov-jupyter-server_temp_copy:/app/venv $(pwd)/jupyter_server
-sudo docker rm erikyvanov-jupyter-server_temp_copy
+docker create --name erikyvanov-jupyter-server_temp_copy erikyvanov-jupyter-server
+docker cp erikyvanov-jupyter-server_temp_copy:/app/venv $(pwd)/jupyter_server
+docker rm erikyvanov-jupyter-server_temp_copy
 ```
 
 ### 3. Run the Jupyter Server
